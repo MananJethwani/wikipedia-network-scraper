@@ -1,0 +1,19 @@
+{
+  "name": "wikipedia_scrape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "csv-writer": "^1.6.0",
+    "dom-parser": "^0.1.6",
+    "html-dom-parser": "^1.1.1",
+    "nodemon": "^2.0.15"
+  }
+}
