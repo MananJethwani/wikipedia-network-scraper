@@ -4,7 +4,7 @@ var createCsvWriter = require("csv-writer").createObjectCsvWriter;
 var parser = new DomParser();
 var { sleep, isValidHttpUrl } = require("./utils");
 var csvWriter = createCsvWriter({
-  path: "./graph2.csv",
+  path: "./graph3.csv",
   header: [
     { id: "node_from", title: "Node From" },
     { id: "node_to", title: "Node To" },
