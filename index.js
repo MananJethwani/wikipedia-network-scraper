@@ -4,7 +4,7 @@ var createCsvWriter = require("csv-writer").createObjectCsvWriter;
 var parser = new DomParser();
 var { sleep, isValidHttpUrl } = require("./utils");
 var csvWriter = createCsvWriter({
-  path: "./graph.csv",
+  path: "./graph2.csv",
   header: [
     { id: "node_from", title: "Node From" },
     { id: "node_to", title: "Node To" },
@@ -101,7 +101,9 @@ async function Dfs(title) {
     }
 
     for (let index in titles) {
-      csvWriter.writeRecords([{ node_from: title, node_to: titles[index] }]).then(() => {});
+      if (titleMap.get(titles[index]) !== undefined) {
+        csvWriter.writeRecords([{ node_from: title, node_to: titles[index] }]).then(() => {});
+      }
       if (titleMap.get(titles[index]) !== undefined && titleMap.get(titles[index]) === 0) {
         titleMap.set(titles[index], 1);
         await Dfs(titles[index]);
