@@ -4,7 +4,7 @@ var createCsvWriter = require("csv-writer").createObjectCsvWriter;
 var parser = new DomParser();
 var { sleep, isValidHttpUrl } = require("./utils");
 var csvWriter = createCsvWriter({
-  path: "/home/manan/Desktop/graph.csv",
+  path: "./graph.csv",
   header: [
     { id: "node_from", title: "Node From" },
     { id: "node_to", title: "Node To" },
@@ -48,7 +48,7 @@ let titleList = [];
 
 let appendArticleList = async (url, gapValue) => {
   try {
-    sleep(25);
+    sleep(30);
     const { data } = await axios.get(encodeURI(url + gapValue));
     if (data && data.query && data.query.pages) {
       Object.keys(data.query.pages).forEach(function (key) {
@@ -81,7 +81,7 @@ contentParser = (html) => {
 
 async function Dfs(title) {
   try {
-    sleep(25);
+    sleep(30);
     const { data } = await axios.get(
       encodeURI(restApiUrl + articlePath + title)
     );
@@ -101,10 +101,9 @@ async function Dfs(title) {
     }
 
     for (let index in titles) {
+      csvWriter.writeRecords([{ node_from: title, node_to: titles[index] }]).then(() => {});
       if (titleMap.get(titles[index]) !== undefined && titleMap.get(titles[index]) === 0) {
         titleMap.set(titles[index], 1);
-        csvWriter.writeRecords([{ node_from: title, node_to: titles[index] }]).then(() => {});
-        edges.push({ node_from: title, node_to: titles[index] });
         await Dfs(titles[index]);
       }
     }
