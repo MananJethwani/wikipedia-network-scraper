@@ -147,6 +147,7 @@ let scrape = async () => {
   console.log("statring scraping");
   await scrapeArticleList(articleList);
   console.log("article list scarpped");
+  console.log(titleList.length)
   titleList.forEach((title) => {
     titleMap.set(title, 0);
   })
