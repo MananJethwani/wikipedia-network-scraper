@@ -102,7 +102,7 @@ async function Dfs(title) {
 
     for (let index in titles) {
       if (titleMap.get(titles[index]) !== undefined) {
-        csvWriter.writeRecords([{ node_from: title, node_to: titles[index] }]).then(() => {});
+        csvWriter.writeRecords([{ node_from: title.replace(/,/g, '_'), node_to: titles[index].replace(/,/g, '_') }]).then(() => {});
       }
       if (titleMap.get(titles[index]) !== undefined && titleMap.get(titles[index]) === 0) {
         titleMap.set(titles[index], 1);
@@ -154,9 +154,6 @@ let scrape = async () => {
   console.log("title list set");
   await scrapeEdges();
   console.log("edges scarpped");
-  // csvWriter.writeRecords(edges).then(() => {
-  //   console.log("Saved Edges");
-  // });
 };
 
 scrape();
